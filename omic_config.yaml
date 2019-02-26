@@ -1,0 +1,72 @@
+star_tool:
+  /home/groups/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+
+star_index:
+  /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
+
+project_id:
+  {project-id}
+
+base_dir:
+  /base/directory/of/project
+
+omic_meta_data:
+  # tab delimited file
+  /absolute/path/to/project/meta-data.txt
+
+gtf_file:
+  /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2015-07-17-14-33-26/Genes/genes.gtf
+
+gff:
+  /home/groups/CEDAR/estabroj/annotations/gff3/mm10/SE.mm10.gff3  
+
+event_type:
+  # Type of exon-event i.e. SE: skipped exon, MXE: mutually exclusive exons, etc.
+  SE
+
+baseline:
+  #Baseline for linear model - needs to be a factor in column listed for : linear_model 
+  38-KC
+
+linear_model:
+  #Column name in meta data file to generate contrasts by
+  Condition
+
+sample_id:
+  #Column name listing unique sample ids to be used. This needs to be the first column in the meta data file
+  SampleID
+
+assembly:
+  mm10
+
+const_exons:
+  /home/groups/CEDAR/estabroj/annotations/gff3/mm10_cons_exons/ensGene.min_1000.const_exons.gff
+
+events:
+  /home/groups/CEDAR/estabroj/annotations/gff3/mm10/SE_indexed
+
+read_length:
+  100
+
+minbayes:
+    5
+
+shuffles:
+    100
+
+pca:
+  labels:
+    #Column name in meta data file to generate group files and comparisons
+    - Condition
+
+diffexp:
+  # contrasts to generate group files and perform comparisons
+  contrasts:
+    # baseline-vs-contrast:
+    #   - contrast 
+    #   - baseline
+
+    38-KC-vs-38-KC-B4:
+      - 38-KC-B4
+      - 38-KC
+    

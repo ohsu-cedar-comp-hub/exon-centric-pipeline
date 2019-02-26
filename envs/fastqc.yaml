@@ -1,0 +1,18 @@
+name: fastqc
+channels:
+  - bioconda
+  - defaults
+  - https://repo.anaconda.com/pkgs/main/linux-64
+  - https://repo.anaconda.com/pkgs/main/noarch
+  - https://repo.anaconda.com/pkgs/free/linux-64
+  - https://repo.anaconda.com/pkgs/free/noarch
+  - https://repo.anaconda.com/pkgs/r/linux-64
+  - https://repo.anaconda.com/pkgs/r/noarch
+  - https://repo.anaconda.com/pkgs/pro/linux-64
+  - https://repo.anaconda.com/pkgs/pro/noarch
+dependencies:
+  - fastqc=0.11.7=5
+  - libgcc-ng=8.2.0=hdf63c60_1
+  - openjdk=8.0.152=h46b5887_1
+  - perl=5.26.2=h14c3975_0
+

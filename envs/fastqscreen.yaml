@@ -1,0 +1,51 @@
+name: fastqscreen
+channels:
+  - bioconda
+  - defaults
+  - https://repo.anaconda.com/pkgs/main/linux-64
+  - https://repo.anaconda.com/pkgs/main/noarch
+  - https://repo.anaconda.com/pkgs/free/linux-64
+  - https://repo.anaconda.com/pkgs/free/noarch
+  - https://repo.anaconda.com/pkgs/r/linux-64
+  - https://repo.anaconda.com/pkgs/r/noarch
+  - https://repo.anaconda.com/pkgs/pro/linux-64
+  - https://repo.anaconda.com/pkgs/pro/noarch
+dependencies:
+  - bowtie=1.2.2=py36h2d50403_1
+  - bowtie2=2.3.4.3=py36h2d50403_0
+  - fastq-screen=0.13.0=pl526_0
+  - perl-gd=2.69=pl526he941832_0
+  - perl-gdgraph=1.54=pl526_0
+  - perl-gdtextutil=0.86=pl526h470a237_4
+  - ca-certificates=2018.03.07=0
+  - certifi=2018.10.15=py36_0
+  - expat=2.2.6=he6710b0_0
+  - fontconfig=2.13.0=h9420a91_0
+  - freetype=2.9.1=h8a8886c_1
+  - giflib=5.1.4=h14c3975_1
+  - icu=58.2=h9c2bf20_1
+  - jpeg=9b=h024ee3a_2
+  - libedit=3.1.20170329=h6b74fdf_2
+  - libffi=3.2.1=hd88cf55_4
+  - libgcc-ng=8.2.0=hdf63c60_1
+  - libgd=2.2.5=hceca4fd_3
+  - libpng=1.6.35=hbc83047_0
+  - libstdcxx-ng=8.2.0=hdf63c60_1
+  - libtiff=4.0.9=he85c1e1_2
+  - libuuid=1.0.3=h1bed415_2
+  - libwebp=1.0.1=h8e7db2f_0
+  - libxml2=2.9.8=h26e45fe_1
+  - ncurses=6.1=he6710b0_1
+  - openssl=1.1.1a=h7b6447c_0
+  - perl=5.26.2=h14c3975_0
+  - pip=18.1=py36_0
+  - python=3.6.7=h0371630_0
+  - readline=7.0=h7b6447c_5
+  - setuptools=40.6.2=py36_0
+  - sqlite=3.25.3=h7b6447c_0
+  - tbb=2019.1=hfd86e86_0
+  - tk=8.6.8=hbc83047_0
+  - wheel=0.32.3=py36_0
+  - xz=5.2.4=h14c3975_4
+  - zlib=1.2.11=h7b6447c_3
+
