@@ -40,11 +40,10 @@ output = snakemake.output[0]
 output_dir = os.path.join(*output.split('/')[:-1])
 ensure_dir(output_dir)
 
-print(output)
 
 
 if len(mono_regulated) > 0:
-    for event in mono_regulated[-2:-1]:
+    for event in mono_regulated:
         shell_cmd = "sashimi_plot  --plot-event {event} {events} {settings_file} --output-dir {output_dir}".format(event=event, events=events, settings_file=settings_file, output_dir=output_dir)
         print(shell_cmd)
         process = subprocess.Popen(shell_cmd.split(), stdout=subprocess.PIPE)
@@ -52,8 +51,6 @@ if len(mono_regulated) > 0:
 else:
     pass
 
-print(output)
 out = os.path.join(os.getcwd(),output)
-print(out)
 out_f = open(out,'w')
 out_f.close()
