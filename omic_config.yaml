@@ -5,14 +5,14 @@ star_index:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
 
 project_id:
-  {project-id}
+  Bulk_ASXL 
 
 base_dir:
-  /base/directory/of/project
+  /home/users/estabroj/precepts/estabroj/experiments/ASXL_bulk 
 
 omic_meta_data:
   # tab delimited file
-  /absolute/path/to/project/meta-data.txt
+  /home/users/estabroj/precepts/estabroj/experiments/ASXL_bulk/data/Bulk_ASXL_metadata.txt
 
 gtf_file:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2015-07-17-14-33-26/Genes/genes.gtf
@@ -26,7 +26,7 @@ event_type:
 
 baseline:
   #Baseline for linear model - needs to be a factor in column listed for : linear_model 
-  38-KC
+  WT
 
 linear_model:
   #Column name in meta data file to generate contrasts by
@@ -66,7 +66,7 @@ diffexp:
     #   - contrast 
     #   - baseline
 
-    38-KC-vs-38-KC-B4:
-      - 38-KC-B4
-      - 38-KC
+    WT-vs-KO:
+      - KO
+      - WT
     
