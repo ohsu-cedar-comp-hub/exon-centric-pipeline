@@ -7,9 +7,28 @@ rule generate_map:
         "../scripts/generate_map_file.py"
 
 
+rule compute_insert_length:
+    input:
+        "samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam",
+    params:
+        const_exons = config['const_exons']
+    output:
+        "samples/miso/analysis/{sample}/insert-dist/Aligned.sortedByCoord.out.bam.insert_len"
+    conda:
+        "../envs/miso_bioconda.yaml"
+    shell:
+        """
+        set +u
+        source deactivate
+        source activate miso_bioconda
+        pe_utils --compute-insert-len {input} {params.const_exons} --output-dir samples/miso/analysis/{wildcards.sample}/insert-dist
+        """
+
+
 rule run_miso:
     input:
         bam="samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam",
+        insert_len="samples/miso/analysis/{sample}/insert-dist/Aligned.sortedByCoord.out.bam.insert_len",
         index="samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam.bai"
     params:
         events = config['events'],
@@ -22,7 +41,9 @@ rule run_miso:
         set +u
         source deactivate
         source activate miso_bioconda
-        miso --run {params.events} {input.bam} --output-dir {params.out_dir} --read-len {params.read_len}
+        MEAN=$(cat Aligned.sortedByCoord.out.bam.insert_len | head -n 1 | grep -o -E 'mean=[0-9.]+'|tr 'mean=' '\n')
+        SDEV=$(cat Aligned.sortedByCoord.out.bam.insert_len | head -n 1 | grep -o -E 'sdev=[0-9.]+'|tr 'sdev=' '\n')
+        miso --run {params.events} {input.bam} --output-dir {params.out_dir} --read-len {params.read_len} --paired-end $MEAN $SDEV
         touch {output}
         """
 
