@@ -1,9 +1,10 @@
 rule STAR_notrim:
     input:
-        fwd = "samples/raw/{sample}_R1.fastq.gz",
-        rev = "samples/raw/{sample}_R2.fastq.gz"
+        "samples/raw/{sample}.fastq.gz"
     output:
         "samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam",
+        "samples/star_notrim/{sample}_bam/Log.final.out",
+        "samples/star_notrim/{sample}_bam/ReadsPerGene.out.tab"
     threads: 12
     params:
         gtf=config["gtf_file"]
@@ -13,7 +14,7 @@ rule STAR_notrim:
 
          shell("""
                 {STAR} --runThreadN {threads} --runMode alignReads --genomeDir {pathToGenomeIndex} \
-                --readFilesIn {input.fwd} {input.rev} \
+                --readFilesIn {input} \
                 --outFileNamePrefix samples/star_notrim/{wildcards.sample}_bam/ \
                 --sjdbGTFfile {params.gtf} --quantMode GeneCounts \
                 --sjdbGTFtagExonParentGene gene_name \

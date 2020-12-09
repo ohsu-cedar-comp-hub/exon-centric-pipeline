@@ -11,7 +11,7 @@ import os
 import pandas as pd
 import json
 from pylab import *
-
+from itertools import combinations
 
 timestamp = ('{:%Y-%m-%d_%H:%M:%S}'.format(datetime.datetime.now()))
 
@@ -23,7 +23,8 @@ with open('cluster.json') as json_file:
 rule_dirs = list(json_dict.keys())
 rule_dirs.pop(rule_dirs.index('__default__'))
 
-SAMPLES, = glob_wildcards("samples/raw/{sample}_R1.fastq.gz")
+SAMPLES, = glob_wildcards("samples/raw/{sample}.fastq.gz")
+comb1,comb2 = zip(*list(combinations(SAMPLES,2)))
 
 for rule in rule_dirs:
     if not os.path.exists(os.path.join(os.getcwd(),'logs',rule)):
@@ -65,6 +66,7 @@ rule all:
         "data/{project_id}_counts.txt".format(project_id=config['project_id']),
         expand("samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam.bai",sample=SAMPLES),
         "samples/miso/settings/{type}_map.pkl".format(type=config['event_type']),
+        expand("samples/miso/comparisons/{sample1}_vs_{sample2}/bayes-factors/{sample1}_vs_{sample2}.miso_bf",sample1=comb1,sample2=comb2),
         expand("samples/miso/sashimi_plots/{contrast}/all_plots_all_launched.txt",contrast = config["diffexp"]["contrasts"]),
         expand("samples/miso/bams/{sample}.bai",sample=SAMPLES),
         "samples/miso/results/{project_id}_psi_table.txt".format(project_id=config['project_id'])

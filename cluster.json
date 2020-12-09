@@ -246,6 +246,14 @@
         "c" : 1,
         "mem" : 54000
     },
+    "samtools_index" :
+    {
+        "J" : "samtools_index",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
+        "c" : 1,
+        "mem" : 54000
+    },
     "genecount" :
     {
         "J" : "genecount",

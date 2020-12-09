@@ -7,14 +7,14 @@ ensGeneMap_f = snakemake.input.map_file
 with open(ensGeneMap_f, 'rb') as fp:
     eventToInfo = pickle.load(fp)
 
-dirs = snakemake.input.sample_list
+dirs = [snakemake.input.sample_list]
 outdir = 'samples/miso/summary_vs'
 
 for dir in dirs:
     print(dir)
-    fname = os.path.basename(dir)
-    sample1, sample2 = fname.split("_vs_")
-    bf_f = os.path.join(os.getcwd(), dir, 'bayes-factors', fname + ".miso_bf")
+    fname = dir.split("/")[3]
+    sample1,sample2 = dir.split("/")[3].split("_vs_")
+    bf_f = dir
     data = []
     for line in open(bf_f):
         if not line.startswith("event_name"):
