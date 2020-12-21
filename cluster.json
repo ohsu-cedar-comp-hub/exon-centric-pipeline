@@ -228,7 +228,7 @@
         "e" : "logs/{rule}/{wildcards.sample}_%j.err",
         "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 12,
-        "mem" : 64000
+        "mem" : 35000
     },
     "sort" :
     {

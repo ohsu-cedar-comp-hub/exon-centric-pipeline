@@ -14,8 +14,6 @@ rule compute_insert_length:
         const_exons = config['const_exons']
     output:
         "samples/miso/analysis/{sample}/insert-dist/Aligned.sortedByCoord.out.bam.insert_len"
-    conda:
-        "../envs/miso_bioconda.yaml"
     shell:
         """
         set +u
@@ -33,7 +31,9 @@ rule run_miso:
     params:
         events = config['events'],
         read_len = config['read_length'],
-        out_dir = lambda w: "samples/miso/analysis/{sample}/{sample}".format(sample=w.sample)
+        out_dir = lambda w: "samples/miso/analysis/{sample}/{sample}".format(sample=w.sample),
+        mean = get_mean,
+        sdev = get_sdev
     output:
         "samples/miso/analysis/{sample}/{sample}/logs/{sample}_run.txt",
     shell:
@@ -41,9 +41,7 @@ rule run_miso:
         set +u
         source deactivate
         source activate miso_bioconda
-        MEAN=$(cat Aligned.sortedByCoord.out.bam.insert_len | head -n 1 | grep -o -E 'mean=[0-9.]+'|tr 'mean=' '\n')
-        SDEV=$(cat Aligned.sortedByCoord.out.bam.insert_len | head -n 1 | grep -o -E 'sdev=[0-9.]+'|tr 'sdev=' '\n')
-        miso --run {params.events} {input.bam} --output-dir {params.out_dir} --read-len {params.read_len} --paired-end $MEAN $SDEV
+        miso --run {params.events} {input.bam} --output-dir {params.out_dir} --read-len {params.read_len} --paired-end {params.mean} {params.sdev}
         touch {output}
         """
 
